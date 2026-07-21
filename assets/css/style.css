@@ -99,6 +99,7 @@ h1, h2, h3 { line-height: 1.15; }
   font-size: 1rem;
   padding: 14px 30px;
   border-radius: 999px;
+  white-space: nowrap;
   text-decoration: none;
   transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s;
   border: none;
@@ -132,10 +133,18 @@ h1, h2, h3 { line-height: 1.15; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(2, 51, 81, 0.08);
   transition: box-shadow 0.3s;
+}
+/* Blur på pseudo-element: backdrop-filter direkte på headeren gør den til
+   containing block for den fixed-positionerede mobilmenu */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
 }
 .site-header.scrolled { box-shadow: var(--shadow); }
 
@@ -166,6 +175,7 @@ h1, h2, h3 { line-height: 1.15; }
   color: var(--navy);
   text-decoration: none;
   border-radius: 12px;
+  white-space: nowrap;
   transition: background 0.2s, color 0.2s;
   background: none;
   border: none;
@@ -710,7 +720,7 @@ h1, h2, h3 { line-height: 1.15; }
 
 /* ---------- Responsive ---------- */
 
-@media (max-width: 1020px) {
+@media (max-width: 1150px) {
   .nav {
     position: fixed;
     inset: 76px 0 0 0;
